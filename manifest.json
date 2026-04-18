@@ -1,10 +1,16 @@
 {
-    "name" : "WebSurf Tracker",
+    "name" : "WebSurf Tracker extension",
     "description" : "tracker for time spent on the web",
     "version" : "1.0",
     "manifest_version" : 3,
     "action" : {
         "default_popup" : "popup.html",
         "default_icon" : "icon.png"
-    }
+    },
+    "background": {
+        "service_worker": "service-worker.js",
+        "type": "module"
+    },
+
+    "permissions": ["storage", "tabs"]
 }
