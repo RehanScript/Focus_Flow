@@ -24,13 +24,18 @@ getDomain()
 async function handleDataTransfer() {
     
     if(currentDomain){
+        const todayDate = new Date().toLocaleDateString() //grab today's date
+        const outerObj = await chrome.storage.local.get('allDomains')//grab the outer object
+        const allDayDomainsObj = outerObj.allDomains || {} //grab all domains
+        
+        if(!allDayDomainsObj[todayDate]){
+            allDayDomainsObj[todayDate] = {}
+        }
 
-        const outerObj = await chrome.storage.local.get('allDomains') || {} //grab the outer object
-        const allDomainsObj = outerObj.allDomains || {} //grab all domains
         const currentDuration = ((Date.now() - currentTime)/1000) // maths
-        const previousDuration = allDomainsObj[currentDomain] || 0 // grab the previous duration of current domain
-        allDomainsObj[currentDomain] = previousDuration + currentDuration // maths
-        await chrome.storage.local.set({'allDomains' : allDomainsObj})
+        const previousDuration = allDayDomainsObj[todayDate][currentDomain] || 0 // grab the previous duration of current domain
+        allDayDomainsObj[todayDate][currentDomain] = previousDuration + currentDuration // maths
+        await chrome.storage.local.set({'allDomains' : allDayDomainsObj})
         
     }
 currentTime = Date.now()                           
