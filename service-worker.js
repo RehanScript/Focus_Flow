@@ -1,4 +1,3 @@
-let logBook = []
 let currentTime = Date.now()
 let currentDomain = ""
 
@@ -15,6 +14,7 @@ async function getDomain() {
             currentDomain = currentDomain.slice(4)
         }
     }
+    currentTime = Date.now()
 }
 getDomain()
 
@@ -24,15 +24,16 @@ getDomain()
 async function handleDataTransfer() {
     
     if(currentDomain){
-        const currentWorkingDomain = {
-        domain: currentDomain,
-        duration: (Date.now() - currentTime)/1000
-        }
 
-        console.log(currentWorkingDomain)
-        logBook.push(currentWorkingDomain)
+        const outerObj = await chrome.storage.local.get('allDomains') || {} //grab the outer object
+        const allDomainsObj = outerObj.allDomains || {} //grab all domains
+        const currentDuration = ((Date.now() - currentTime)/1000) // maths
+        const previousDuration = allDomainsObj[currentDomain] || 0 // grab the previous duration of current domain
+        allDomainsObj[currentDomain] = previousDuration + currentDuration // maths
+        await chrome.storage.local.set({'allDomains' : allDomainsObj})
+        
     }
-currentTime = Date.now()
+currentTime = Date.now()                           
 }
 
 
