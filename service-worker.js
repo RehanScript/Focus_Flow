@@ -58,7 +58,7 @@ chrome.tabs.onActivated.addListener(async(activeinfo) => {// the activeinfo cont
         else{
             currentDomain = hostName
         }
-        console.log(currentDomain)
+        // console.log(currentDomain)
     }
 })
 
@@ -77,6 +77,6 @@ chrome.tabs.onUpdated.addListener(async(tabId, changeInfo, tabInfo) => {//here t
         else{
             currentDomain = domain
         }
-        console.log(currentDomain)
+        // console.log(currentDomain)
     }
 })

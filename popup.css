@@ -35,6 +35,9 @@ body {
     list-style: none;
     padding: 0;
     margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
 }
 
 .domain-item {
@@ -42,4 +45,58 @@ body {
     justify-content: space-between;
     padding: 10px 0;
     border-bottom: 1px solid #333;
+}
+
+.no-domain {
+    color: red;
+}
+
+.todayslist{
+  background-color: rgb(40, 37, 42);
+  padding: 20px;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  position: relative;
+  transition: transform 0.2s ease;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.domain {
+  color: #ffffff;
+  font-weight: 500;
+  font-size: 1.1rem;
+}
+
+.duration {
+  color: #9a939f;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+}
+
+footer {
+    margin-top: 18px;
+}
+
+#reset-btn {
+    width: 100%;
+    border: none;
+    border-radius: 10px;
+    padding: 10px 14px;
+    background: #bb86fc;
+    color: #121212;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.15s ease, transform 0.15s ease;
+}
+
+#reset-btn:hover {
+    background: #cf9eff;
+}
+
+#reset-btn:active {
+    transform: translateY(1px);
 }
