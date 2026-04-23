@@ -33,6 +33,7 @@ async function renderer(){
     const todaysEntries =  await getTodaysEntries() || {}
     if(Object.keys(todaysEntries).length === 0){
         domainList.innerHTML = '<li class="no-domain">No Data For Today, Go Back To Work</li>'
+        document.getElementById('total-active-time').innerHTML = `00h 00m 00sec`
     }
     else{//we will render the entries to the list
         let totalTime = 0
