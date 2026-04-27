@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deep Focus Mode</title>
+    <link rel="stylesheet" href="focus.css">
+</head>
+<body>
+    <main class="focus-page">
+        <a class="back-link" href="#" aria-label="Return to home page">← Return to home page</a>
+
+        <section class="focus-panel" aria-label="Focus mode controls">
+            <h1 class="page-title">Focus Mode Tab</h1>
+
+            <div class="input-row">
+                <span class="field-label">Task Name</span>
+                <input class="text-input" id="task-name" type="text" placeholder="Enter task name">
+            </div>
+
+            <div class="input-row domain-input-row">
+                <span class="field-label">Allowed domains</span>
+                <div class="domain-entry">
+                    <input class="text-input" id="domain-input" type="text" placeholder="Enter allowed domain">
+                    <button class="add-domain" type="button" aria-label="Add allowed domain">+</button>
+                </div>
+            </div>
+
+            <ul class="domain-list" id="domain-list"></ul>
+
+            <div class="input-row">
+                <span class="field-label">Session duration</span>
+                <input class="text-input timer-input" id="timer-display" type="text" placeholder="Session Duration">
+            </div>
+
+            <div class="action-stack">
+                <button class="focus-btn" type="button">Start Focus Session</button>
+                <button class="focus-btn" type="button">Stop Focus Session</button>
+                <button class="analytics-btn" type="button">Focus Session Analytics</button>
+            </div>
+        </section>
+    </main>
+    <script src="focus.js"></script>
+</body>
+</html>

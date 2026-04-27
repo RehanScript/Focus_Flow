@@ -100,3 +100,28 @@ footer {
 #reset-btn:active {
     transform: translateY(1px);
 }
+
+#deep-focus-btn {
+    width: 100%;
+    margin-top: 10px;
+    border: none;
+    border-radius: 10px;
+    padding: 12px 14px;
+    background: linear-gradient(135deg, #bb86fc, #7c4dff);
+    color: #ffffff;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 8px 18px rgba(124, 77, 255, 0.28);
+    transition: transform 0.15s ease, box-shadow 0.15s ease, filter 0.15s ease;
+}
+
+#deep-focus-btn:hover {
+    filter: brightness(1.05);
+    box-shadow: 0 10px 22px rgba(124, 77, 255, 0.36);
+}
+
+#deep-focus-btn:active {
+    transform: translateY(1px);
+    box-shadow: 0 6px 14px rgba(124, 77, 255, 0.24);
+}
+

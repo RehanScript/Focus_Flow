@@ -69,3 +69,9 @@ resetButton.addEventListener('click', async () => {
 })
 
 renderer()
+
+
+//focus mode redirect
+document.getElementById('deep-focus-btn').addEventListener('click', () => {
+    window.location.href = 'focus.html'
+})
