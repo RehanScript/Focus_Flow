@@ -12,6 +12,7 @@ let allTabs = []//array to contain all the tabs and their required details
 async function formatTabs(){
     const tabs = await getTabs();
     tabs.forEach(tab => {
+           
         const tabObj = {
             hostname : new URL(tab.url).hostname,
             url : tab.url,
@@ -28,14 +29,20 @@ async function formatTabs(){
 //list out all the tabs for the user to select
 function renderTabs(tabs){
     tabs.forEach(tab => {
+        if (!tab.url.startsWith('http://') && !tab.url.startsWith('https://')) {
+            return;
+        }
         const li = document.createElement('li')
         li.innerHTML = `
         <span>${tab.hostname}</span>
         `
+
+        li.dataset.id = tab.id
         document.getElementsByClassName('availabe-domains')[0].appendChild(li)
+
+        console.log(tab.selected)
     });
 }
-
 
 
 async function runFunction() {
@@ -44,3 +51,48 @@ async function runFunction() {
 }
 
 runFunction()
+
+//to select and unselect the domains/tabs
+const availabeDomains = document.getElementsByClassName('availabe-domains')
+availabeDomains[0].addEventListener('click', (e) => {
+    const li = e.target.closest('li')
+    if(li){
+        console.log(li.dataset.id);
+        
+        const domainId = li.dataset.id
+        li.classList.toggle('selected')
+        allTabs.forEach(domain => {
+            if(domain.id == parseInt(domainId)){
+                domain.selected = !domain.selected
+                console.log(domain.selected);
+            }
+        });
+    }
+})
+
+
+//start focus session
+let currentSession = []
+document.getElementsByClassName('focus-btn')[0].addEventListener('click', () => {
+    const currentSessionObj = {
+        taskName : document.getElementById('task-name').innerText,
+        taskDuration : parseInt(document.getElementById('timer-display').innerText),// this is coming in as minutes
+        startTime : Date.now(),
+        completed : false
+    }
+    currentSession.push(currentSessionObj);
+
+    //tabs to close
+    let tabsToClose = []
+    allTabs.forEach(tab => {
+        if(!tab.selected){
+            tabsToClose.push(tab.id)
+        }
+    });
+    chrome.tabs.remove(tabsToClose)
+})
+
+
+document.getElementsByClassName('analytics-btn')[0].addEventListener('click', () => {
+    window.location.href = 'focusSessionAnalytics.html'
+})
