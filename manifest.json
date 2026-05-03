@@ -12,5 +12,5 @@
         "type": "module"
     },
 
-    "permissions": ["storage", "tabs", "storage"]
+    "permissions": ["storage", "tabs"]
 }

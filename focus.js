@@ -91,9 +91,14 @@ document.getElementsByClassName('focus-btn')[0].addEventListener('click', async 
     chrome.tabs.remove(tabsToClose)
     await chrome.storage.local.set({'activeSession' : currentSessionObj})
     console.log(currentSessionObj)
+    window.location.href = 'popup.html'
 })
 
 
 document.getElementsByClassName('analytics-btn')[0].addEventListener('click', () => {
     window.location.href = 'focusSessionAnalytics.html'
+})
+
+document.getElementsByClassName('back-link')[0].addEventListener('click', () => {
+    window.location.href = 'popup.html'
 })

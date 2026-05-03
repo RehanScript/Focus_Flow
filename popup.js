@@ -75,3 +75,42 @@ renderer()
 document.getElementById('deep-focus-btn').addEventListener('click', () => {
     window.location.href = 'focus.html'
 })
+
+
+
+//grab the current active session if any
+async function getActiveSession() {
+    const result = await chrome.storage.local.get('activeSession')
+    const activeSession = result.activeSession
+
+    const panel = document.getElementById('active-session-panel')
+    const timer = document.getElementById('active-session-timer')
+    const stopBtn = document.getElementById('stop-session-btn')
+
+    if(!activeSession){
+        panel.classList.add('hidden')
+        stopBtn.classList.add('hidden')
+        return
+    }
+
+    panel.classList.remove('hidden')
+    stopBtn.classList.remove('hidden')
+
+    function updateTimer(){
+        let remainingTimeInMs = activeSession.endTime - Date.now()
+
+        if(remainingTimeInMs<=0){
+            timer.innerHTML = `00h 00m 00sec`
+            clearInterval(sessionId)
+            panel.classList.add('hidden')
+            stopBtn.classList.add('hidden')
+            return
+        }
+        let remaingTimeSec = parseInt(remainingTimeInMs/1000)
+        timer.innerHTML = timeFormating(remaingTimeSec)      
+    }
+    updateTimer()
+    const sessionId = setInterval(updateTimer, 1000)
+}
+
+getActiveSession()
