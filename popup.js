@@ -96,7 +96,7 @@ async function getActiveSession() {
     panel.classList.remove('hidden')
     stopBtn.classList.remove('hidden')
 
-    function updateTimer(){
+    async function updateTimer(){
         let remainingTimeInMs = activeSession.endTime - Date.now()
 
         if(remainingTimeInMs<=0){
@@ -104,6 +104,8 @@ async function getActiveSession() {
             clearInterval(sessionId)
             panel.classList.add('hidden')
             stopBtn.classList.add('hidden')
+            await chrome.storage.local.set({'CompletedSessions' : activeSession})
+            await chrome.storage.local.remove('activeSession')
             return
         }
         let remaingTimeSec = parseInt(remainingTimeInMs/1000)
