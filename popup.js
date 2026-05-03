@@ -86,20 +86,28 @@ async function getActiveSession() {
     const panel = document.getElementById('active-session-panel')
     const timer = document.getElementById('active-session-timer')
     const stopBtn = document.getElementById('stop-session-btn')
+    const focusBtn = document.getElementById('deep-focus-btn')
+    const resetBtn = document.getElementById('reset-btn')
 
     if(!activeSession){
+        
         panel.classList.add('hidden')
         stopBtn.classList.add('hidden')
         return
     }
 
+    focusBtn.classList.add('hidden')
+    resetBtn.classList.add('hidden')
     panel.classList.remove('hidden')
     stopBtn.classList.remove('hidden')
 
+    let sessionId;
     async function updateTimer(){
         let remainingTimeInMs = activeSession.endTime - Date.now()
 
         if(remainingTimeInMs<=0){
+            focusBtn.classList.remove('hidden')
+            resetBtn.classList.remove('hidden')
             timer.innerHTML = `00h 00m 00sec`
             clearInterval(sessionId)
             panel.classList.add('hidden')
@@ -107,14 +115,22 @@ async function getActiveSession() {
             activeSession.completed = true
             await chrome.storage.local.remove('activeSession')
             await updateCompletedSessions(activeSession);
-
             return
         }
         let remaingTimeSec = parseInt(remainingTimeInMs/1000)
         timer.innerHTML = timeFormating(remaingTimeSec)      
     }
     updateTimer()
-    const sessionId = setInterval(updateTimer, 1000)
+    sessionId = setInterval(updateTimer, 1000)
+
+    stopBtn.addEventListener('click', async () => {
+        focusBtn.classList.remove('hidden')
+        resetBtn.classList.remove('hidden')
+        panel.classList.add('hidden')
+        stopBtn.classList.add('hidden')
+        await chrome.storage.local.remove('activeSession')
+        clearInterval(sessionId)
+    })
 }
 
 getActiveSession()
