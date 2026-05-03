@@ -72,15 +72,14 @@ availabeDomains[0].addEventListener('click', (e) => {
 
 
 //start focus session
-let currentSession = []
-document.getElementsByClassName('focus-btn')[0].addEventListener('click', () => {
+document.getElementsByClassName('focus-btn')[0].addEventListener('click', async () => {
     const currentSessionObj = {
-        taskName : document.getElementById('task-name').innerText,
-        taskDuration : parseInt(document.getElementById('timer-display').innerText),// this is coming in as minutes
+        taskName : document.getElementById('task-name').value,
+        taskDuration : parseInt(document.getElementById('timer-display').value)*60*1000,// this is coming in as minutes
         startTime : Date.now(),
+        endTime : Date.now() + parseInt(document.getElementById('timer-display').value)*60*1000,
         completed : false
     }
-    currentSession.push(currentSessionObj);
 
     //tabs to close
     let tabsToClose = []
@@ -90,6 +89,8 @@ document.getElementsByClassName('focus-btn')[0].addEventListener('click', () => 
         }
     });
     chrome.tabs.remove(tabsToClose)
+    await chrome.storage.local.set({'activeSession' : currentSessionObj})
+    console.log(currentSessionObj)
 })
 
 

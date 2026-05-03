@@ -51,6 +51,48 @@ body {
     color: red;
 }
 
+.hidden {
+    display: none !important;
+}
+
+.active-session-panel {
+    margin-top: 16px;
+    padding: 14px;
+    border: 1px solid rgba(187, 134, 252, 0.22);
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.03);
+}
+
+.active-session-timer {
+    margin-bottom: 12px;
+    color: var(--accent);
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-align: center;
+}
+
+.stop-session-btn {
+    width: 100%;
+    border: none;
+    border-radius: 10px;
+    padding: 10px 14px;
+    background: #bb86fc;
+    color: #121212;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.15s ease, transform 0.15s ease, filter 0.15s ease;
+}
+
+.stop-session-btn:hover {
+    filter: brightness(1.05);
+    background: #cf9eff;
+}
+
+.stop-session-btn:active {
+    transform: translateY(1px);
+}
+
 .todayslist{
   background-color: rgb(40, 37, 42);
   padding: 20px;
