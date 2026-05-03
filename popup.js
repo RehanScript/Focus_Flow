@@ -81,7 +81,7 @@ document.getElementById('deep-focus-btn').addEventListener('click', () => {
 //grab the current active session if any
 async function getActiveSession() {
     const result = await chrome.storage.local.get('activeSession')
-    const activeSession = result.activeSession
+    let activeSession = result.activeSession
 
     const panel = document.getElementById('active-session-panel')
     const timer = document.getElementById('active-session-timer')
@@ -104,8 +104,10 @@ async function getActiveSession() {
             clearInterval(sessionId)
             panel.classList.add('hidden')
             stopBtn.classList.add('hidden')
-            await chrome.storage.local.set({'CompletedSessions' : activeSession})
+            activeSession.completed = true
             await chrome.storage.local.remove('activeSession')
+            await updateCompletedSessions(activeSession);
+
             return
         }
         let remaingTimeSec = parseInt(remainingTimeInMs/1000)
@@ -116,3 +118,18 @@ async function getActiveSession() {
 }
 
 getActiveSession()
+
+//update all completedSession
+async function updateCompletedSessions(completedSession) {
+    const todayDate = new Date().toLocaleDateString()
+    const result = await chrome.storage.local.get('completedSessions')
+    const allCompletedSessions = result.completedSessions || {}
+
+    if(!allCompletedSessions[todayDate]){
+        allCompletedSessions[todayDate] = []
+    }
+
+    completedSession.completed = true
+    allCompletedSessions[todayDate].push(completedSession)
+    await chrome.storage.local.set({'completedSessions' : allCompletedSessions})
+}
