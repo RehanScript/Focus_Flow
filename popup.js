@@ -130,6 +130,7 @@ async function getActiveSession() {
         stopBtn.classList.add('hidden')
         await chrome.storage.local.remove('activeSession')
         clearInterval(sessionId)
+        await updateCompletedSessions(activeSession);
     })
 }
 
