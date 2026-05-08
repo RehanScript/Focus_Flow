@@ -150,3 +150,36 @@ async function updateCompletedSessions(completedSession) {
     allCompletedSessions[todayDate].push(completedSession)
     await chrome.storage.local.set({'completedSessions' : allCompletedSessions})
 }
+
+
+//deleting old data and keeping only 7 day of record
+async function dataCleaner() {
+    //cleaning all domains
+    let numberOfDays = 0
+    const result = await chrome.storage.local.get('allDomains')
+    const allDomains = result.allDomains || {}
+    const keys = Object.keys(allDomains)
+
+    keys.forEach((key) => {
+        if(numberOfDays>=7){
+            delete allDomains[key]
+        }
+        numberOfDays++
+    })
+    await chrome.storage.local.set({'allDomains' : allDomains})
+
+    //cleaning the focused sessions
+    const result2 = await chrome.storage.local.get('completedSessions')
+    const completedSessions = result2.completedSessions || {}
+    numberOfDays = 0;
+    const sessionKeys = Object.keys(completedSessions)
+    sessionKeys.forEach((key) => {
+        if(numberOfDays>=7){
+            delete completedSessions[key]
+        }
+        numberOfDays++
+    })
+    await chrome.storage.local.set({'completedSessions': completedSessions})
+}
+
+dataCleaner()

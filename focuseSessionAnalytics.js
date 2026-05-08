@@ -15,6 +15,7 @@ async function renderTodaysSession() {
     todaysSessions.forEach(session => {
         const li = document.createElement('li')
         const durationInMinutes = Math.round(session.taskDuration / (1000 * 60))
+
         li.innerHTML = `
             <span class="session-name">${session.taskName}</span>
             <span class="session-duration">${durationInMinutes} min</span>
