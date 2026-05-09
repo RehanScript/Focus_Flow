@@ -292,10 +292,6 @@ If you want to keep improving the project, here are natural next steps:
 - add export/import for session data
 - add more detailed charts for weekly performance
 
-## License
-
-No license has been added yet. If you plan to publish this publicly on GitHub, consider adding one before sharing the repository.
-
 ## Author
 
 Built as a personal productivity / focus-tracking Chrome extension project.
