@@ -73,6 +73,8 @@ availabeDomains[0].addEventListener('click', (e) => {
 
 //start focus session
 document.getElementsByClassName('focus-btn')[0].addEventListener('click', async () => {
+    const allowedTabs = allTabs.filter(tab => tab.selected)
+    const allowedDomains = [...new Set(allowedTabs.map(tab => tab.hostname))]
     const currentSessionObj = {
         taskName : document.getElementById('task-name').value,
         taskDuration : parseInt(document.getElementById('timer-display').value)*60*1000,// this is coming in as minutes
@@ -90,6 +92,14 @@ document.getElementsByClassName('focus-btn')[0].addEventListener('click', async 
     });
     chrome.tabs.remove(tabsToClose)
     await chrome.storage.local.set({'activeSession' : currentSessionObj})
+    await chrome.storage.local.set({
+        focusLock: {
+            isActive: true,
+            allowedDomains,
+            allowedTabIds: allowedTabs.map(tab => tab.id),
+            sessionEndTime: currentSessionObj.endTime
+        }
+    })
     console.log(currentSessionObj)
     window.location.href = 'popup.html'
 })

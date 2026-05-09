@@ -114,6 +114,7 @@ async function getActiveSession() {
             stopBtn.classList.add('hidden')
             activeSession.completed = true
             await chrome.storage.local.remove('activeSession')
+            await chrome.storage.local.remove('focusLock')
             await updateCompletedSessions(activeSession);
             return
         }
@@ -129,6 +130,7 @@ async function getActiveSession() {
         panel.classList.add('hidden')
         stopBtn.classList.add('hidden')
         await chrome.storage.local.remove('activeSession')
+        await chrome.storage.local.remove('focusLock')
         clearInterval(sessionId)
         await updateCompletedSessions(activeSession);
     })

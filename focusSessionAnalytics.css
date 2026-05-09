@@ -78,6 +78,114 @@ h1 {
     line-height: 1.4;
 }
 
+.graph-section {
+    display: grid;
+    gap: 10px;
+    padding: 14px;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.02);
+}
+
+.graph-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.graph-eyebrow {
+    margin: 0 0 4px;
+    color: var(--text-secondary);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.graph-header h2 {
+    margin: 0;
+    font-size: 15px;
+    line-height: 1.2;
+}
+
+.graph-chip {
+    align-self: center;
+    padding: 6px 10px;
+    border-radius: 999px;
+    background: rgba(187, 134, 252, 0.12);
+    color: var(--accent);
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+}
+
+.graph-card {
+    position: relative;
+    display: flex;
+    gap: 10px;
+    padding: 12px 12px 8px 6px;
+    border-radius: 14px;
+    background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.015));
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    overflow: hidden;
+}
+
+.graph-y-axis {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-end;
+    min-width: 28px;
+    height: 180px;
+    padding: 1px 0 2px;
+    color: var(--text-secondary);
+    font-size: 10px;
+    letter-spacing: 0.04em;
+}
+
+.graph-canvas-wrap {
+    position: relative;
+    width: 100%;
+    height: 180px;
+    border-radius: 12px;
+    background:
+        linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+    background-size: 24px 24px;
+}
+
+#sessionsChart {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+.graph-grid {
+    position: absolute;
+    inset: 0;
+    border-radius: 12px;
+    pointer-events: none;
+    box-shadow: inset 0 0 0 1px rgba(255,255,255,0.04);
+}
+
+.graph-x-axis {
+    display: grid;
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+    gap: 8px;
+    padding: 0 8px 2px 34px;
+    color: var(--text-secondary);
+    font-size: 10px;
+    letter-spacing: 0.04em;
+}
+
+.graph-x-axis span {
+    text-align: center;
+    white-space: nowrap;
+}
+
 .session-list {
     list-style: none;
     margin: 0;

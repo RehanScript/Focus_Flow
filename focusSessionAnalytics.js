@@ -15,3 +15,27 @@ async function renderTodaysSession() {
 }
 
 renderTodaysSession()
+
+//session graphs
+async function renderGraphAxisLabels() {
+    const completedSessions = await chrome.storage.local.get('completedSessions');
+    const allCompletedSessions = completedSessions.completedSessions || {};
+    const axis = document.getElementById('graph-x-axis');
+
+    const dates = Object.keys(allCompletedSessions)
+        .slice(-7)
+        .map(dateString => {
+            const date = new Date(dateString);
+            if (Number.isNaN(date.getTime())) {
+                return dateString;
+            }
+
+            const day = String(date.getDate()).padStart(2, '0');
+            const month = String(date.getMonth() + 1).padStart(2, '0');
+            return `${day}-${month}`;
+        });
+
+    axis.innerHTML = dates.map(date => `<span>${date}</span>`).join('');
+}
+
+renderGraphAxisLabels();

@@ -16,6 +16,33 @@
 				<p class="subtitle">Review your finished focus sessions of today below.</p>
 			</header>
 
+			<section class="graph-section">
+				<div class="graph-header">
+					<div>
+						<p class="graph-eyebrow">Session Trend</p>
+						<h2>Last 7 Days</h2>
+					</div>
+					<span class="graph-chip">hours</span>
+				</div>
+
+				<div class="graph-card">
+					<div class="graph-y-axis">
+						<span>4h</span>
+						<span>3h</span>
+						<span>2h</span>
+						<span>1h</span>
+						<span>0h</span>
+					</div>
+
+					<div class="graph-canvas-wrap">
+						<canvas id="sessionsChart" width="280" height="180" aria-label="Focus session trend graph"></canvas>
+						<div class="graph-grid"></div>
+					</div>
+				</div>
+
+				<div class="graph-x-axis" id="graph-x-axis"></div>
+			</section>
+
 			<ul class="session-list">
 				
 			</ul>
